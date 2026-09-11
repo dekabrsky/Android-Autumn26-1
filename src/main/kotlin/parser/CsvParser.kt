@@ -46,6 +46,8 @@ object CsvParser {
             Team(teamName, teamCity)
         }
 
+        team.numberOfPlayers++
+
         return Player(
             name = parts[0],
             team = team,
