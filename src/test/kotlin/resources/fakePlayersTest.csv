@@ -1,0 +1,23 @@
+Name;Team;City;Position;Nationality;Agency;Transfer cost;Participations;Goals;Assists;Yellow cards;Red cards
+Correct Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;2;1
+Empty Agency Person;Team A;Moscow;FORWARD;Russia;;1000000;10;5;3;2;1
+Blank Agency Person;Team A;Moscow;FORWARD;Russia; ;1000000;10;5;3;2;1
+Lowercase Person;Team A;Moscow;forward;Russia;Agency A;1000000;10;5;3;2;1
+Fields With Spaces Person;  Team A  ;  Moscow  ;  FORWARD  ;  Russia;  Agency A  ;  1000000 ;  10  ;  5  ;  3  ; 2  ;  1
+;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;2;1
+Empty Team Person;;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;2;1
+Empty City Person;Team A;;FORWARD;Russia;Agency A;1000000;10;5;3;2;1
+Empty Position;Team A;Moscow;;Russia;Agency A;1000000;10;5;3;2;1
+Empty Nationality Person;Team A;Moscow;FORWARD;;Agency A;1000000;10;5;3;2;1
+Empty Transfer Cost Person;Team A;Moscow;FORWARD;Russia;Agency A;;10;5;3;2;1
+Empty Participations Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;;5;3;2;1
+Empty Goals Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;;3;2;1
+Empty Assists Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;;2;1
+Empty Yellow Cards Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;;1
+Empty Red Cards Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;2;
+Non Numeric Transfer Cost Person;Team A;Moscow;FORWARD;Russia;Agency A;a;10;5;3;2;1
+Non Numeric Participations Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;a;5;3;2;1
+Non Numeric Goals Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;a;3;2;1
+Non Numeric Assists Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;a;2;1
+Non Numeric Yellow Cards Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;a;1
+Non Numeric Red Cards Person;Team A;Moscow;FORWARD;Russia;Agency A;1000000;10;5;3;2;a
