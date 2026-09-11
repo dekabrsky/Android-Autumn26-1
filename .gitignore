@@ -1,6 +1,7 @@
 # Gradle
 .gradle/
 build/
+**/build/
 
 # Kotlin
 .kotlin/
@@ -12,10 +13,29 @@ build/
 *.iws
 out/
 
-.vscode/
-.zcode/
+# Local machine settings
 local.properties
+
+# Java / JVM
+*.class
+hs_err_pid*
+replay_pid*
+
+# Logs
 *.log
+
+# OS files
 .DS_Store
 Thumbs.db
-*.hprof
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.orig
