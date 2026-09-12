@@ -1,3 +1,4 @@
+
 plugins {
     kotlin("jvm") version "2.0.21"
     application
@@ -13,6 +14,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    // Задание 4: визуализация (Вариант 2 — цена и результативность)
+    implementation("org.jfree:jfreechart:1.5.4")
 }
 
 tasks.test {
