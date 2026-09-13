@@ -1,0 +1,143 @@
+            <iframe src='about:blank' style='border:none !important;' width='800' height='500' srcdoc="&lt;html lang=&quot;en&quot;>
+   &lt;head>
+       &lt;meta charset=&quot;UTF-8&quot;>
+       &lt;style> html, body { margin: 0; padding: 0; overflow: hidden; } &lt;/style>
+       &lt;script type=&quot;text/javascript&quot; data-lets-plot-script=&quot;library&quot; src=&quot;https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.7.3/js-package/distr/lets-plot.min.js&quot;>&lt;/script>
+   &lt;/head>
+   &lt;body>
+          &lt;div id=&quot;Tsxz7X&quot;>&lt;/div>
+   &lt;script type=&quot;text/javascript&quot; data-lets-plot-script=&quot;plot&quot;>
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: &quot;FIXED&quot;,
+       height_mode: &quot;FIXED&quot;,
+       width: 800.0, 
+       height: 500.0 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById(&quot;Tsxz7X&quot;);
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+&quot;ggtitle&quot;:{
+&quot;text&quot;:&quot;Разброс трансферных стоимостей по позициям&quot;
+},
+&quot;mapping&quot;:{
+},
+&quot;guides&quot;:{
+&quot;x&quot;:{
+&quot;title&quot;:&quot;Позиция игрока&quot;
+},
+&quot;y&quot;:{
+&quot;title&quot;:&quot;Рыночная стоимость (млн)&quot;
+}
+},
+&quot;data&quot;:{
+&quot;marketValue&quot;:[75.012006,33.850831,64.396675,52.944545,94.715977,41.436703,50.056961,4.483194,33.413181,71.207725,7.294362,91.242062,30.073197,63.619334,11.576194,17.429288,71.830024,61.663205,46.579365,32.216127,35.819257,98.013441,37.747125,62.146819,32.437027,92.423724,28.157018,81.406645,69.853008,83.408744,78.672711,89.763637,84.797258,64.825412,81.982516,80.64547,23.751846,76.599052,15.642504,54.337623,37.451722,31.255327,82.762815,43.200244,29.739181,95.940267,47.790905,82.24145,73.823976,90.711076,87.364089,42.766444,1.400434,37.558077,55.354033,51.592286,63.853946,46.89012,81.194802,10.704361,67.67768,16.170779,19.662027,41.760175,64.84765,28.059144,35.839056,56.455685,73.478503,11.543884,88.643847,50.822344,30.423082,72.009124,20.730872,42.400437,88.718909,35.27053,59.547765,63.096649,40.298215,10.208129,19.780728,13.756247,47.127997,12.305524,62.431251,52.894208,10.169185,3.202524,33.023445,17.287154,9.262668,43.127466,15.134083,88.584168,92.814158,0.732179,2.789526,15.436632,55.11512,9.433827,54.636028,19.548523,48.337017,93.300806,65.154327,83.396911,77.111426,16.839208,35.776993,72.494545,77.198084,99.654949,30.155229,70.169245,11.455592,72.162189,97.764932,50.974118,58.449144,72.060289,14.904333,74.416093,14.492287,12.920711,4.2785,27.600151,2.927443,80.347983,43.37335,96.017118,9.74727,9.637679,24.635495,19.434025,27.227518,86.66714,58.635459,54.485745,72.173609,40.846234,26.313596,65.974358,93.161684,24.036368,38.420562,63.157269,9.845897,88.109698,81.392483,22.417993,45.000551,10.214744,36.559477,98.338198,79.610637,23.376109,11.395729,32.655468,24.536019,4.203269,40.636701,54.12271,82.376854,40.857689,69.108675,86.404679,31.862745,58.974935,1.829583,86.274134,44.464463,51.83349,68.115934,36.875943,14.869491,21.061368,18.646283,7.380307,32.499348,25.699067,51.181247,4.005916,83.261774,86.454178,64.171602,43.33968,30.101798,36.429259,51.812758,79.499682,9.111003,56.147774,71.001765,98.966455,13.276868,84.592729,25.586072,95.898727,16.316168,7.891051,71.671367,50.746564,59.052738,3.184115,79.147097,1.850405,62.698825,47.556102,81.507717,75.96727,54.202579,97.729347,53.608367,32.821305,39.373848,87.664016,44.568969,47.975979],
+&quot;position&quot;:[&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;вратарь&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;вратарь&quot;,&quot;вратарь&quot;,&quot;защитник&quot;,&quot;защитник&quot;,&quot;полузащитник&quot;,&quot;нападающий&quot;,&quot;полузащитник&quot;,&quot;защитник&quot;,&quot;нападающий&quot;,&quot;нападающий&quot;]
+},
+&quot;ggsize&quot;:{
+&quot;width&quot;:800.0,
+&quot;height&quot;:500.0
+},
+&quot;kind&quot;:&quot;plot&quot;,
+&quot;scales&quot;:[{
+&quot;aesthetic&quot;:&quot;x&quot;,
+&quot;discrete&quot;:true
+},{
+&quot;aesthetic&quot;:&quot;y&quot;,
+&quot;limits&quot;:[null,null]
+},{
+&quot;aesthetic&quot;:&quot;color&quot;,
+&quot;discrete&quot;:true
+},{
+&quot;aesthetic&quot;:&quot;y&quot;,
+&quot;format&quot;:&quot;{.1f}&quot;,
+&quot;limits&quot;:[null,null]
+}],
+&quot;layers&quot;:[{
+&quot;mapping&quot;:{
+&quot;x&quot;:&quot;position&quot;,
+&quot;y&quot;:&quot;marketValue&quot;,
+&quot;color&quot;:&quot;position&quot;
+},
+&quot;stat&quot;:&quot;identity&quot;,
+&quot;sampling&quot;:&quot;none&quot;,
+&quot;alpha&quot;:0.6,
+&quot;inherit_aes&quot;:false,
+&quot;position&quot;:&quot;jitter&quot;,
+&quot;geom&quot;:&quot;point&quot;,
+&quot;data&quot;:{
+}
+}],
+&quot;data_meta&quot;:{
+&quot;series_annotations&quot;:[{
+&quot;type&quot;:&quot;str&quot;,
+&quot;column&quot;:&quot;position&quot;
+},{
+&quot;type&quot;:&quot;float&quot;,
+&quot;column&quot;:&quot;marketValue&quot;
+}]
+},
+&quot;spec_id&quot;:&quot;4&quot;
+};
+           fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing);
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' &amp;&amp; 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize &amp;&amp; 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive &amp;&amp; observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   &lt;/script>
+   &lt;/body>
+&lt;/html>"></iframe>    
