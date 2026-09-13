@@ -105,7 +105,7 @@ class Resolver(private val players: List<Player>) : IResolver {
 
         // находим медиану с помощью библиотеки jetbrains.kotlinx:dataframe-core
         val costs = players.map { it.transferCost }
-        val medianValue = costs.toColumn().median()
+        val medianValue = costs.toColumn().median().toLong()
 
         val sumOfGoals = players.sumOf { it.goals }.toDouble()
         val cheaperFilter = PlayerFilter.CheaperThan(medianValue)

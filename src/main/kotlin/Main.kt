@@ -1,3 +1,5 @@
+import charts.buildPositionChart
+import charts.buildTop5TeamsChart
 import dsl.ReportBuilder
 import model.Team
 import parser.CsvParser
@@ -124,4 +126,9 @@ fun main() {
             }
         }
     }
+
+    println("\n========================= 4 ЗАДАНИЕ =========================")
+    println("График первого задания открылся сам, второго - создались в папке lets-plot-images")
+    buildPositionChart(result.players)
+    buildTop5TeamsChart(result.players)
 }
