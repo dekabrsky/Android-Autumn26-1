@@ -1,8 +1,12 @@
 package resolver
 
+import filters.PlayerFilter
 import model.Player
 import model.Position
 import model.Team
+import org.jetbrains.kotlinx.dataframe.api.median
+import org.jetbrains.kotlinx.dataframe.api.toColumn
+import kotlin.math.cos
 
 class Resolver(private val players: List<Player>) : IResolver {
 
@@ -11,6 +15,16 @@ class Resolver(private val players: List<Player>) : IResolver {
     override fun getBestScorerDefender(): Pair<String, Int> {
         return players
             .filter { it.position == Position.DEFENDER }
+            .maxByOrNull { it.goals }
+            ?.let { it.name to it.goals }
+            ?: error("В списке не осталось ни одного защитника")
+    }
+
+    override fun getBestScorerDefenderWithFilter(): Pair<String, Int> {
+        val defaultFilter = PlayerFilter.ByPosition(Position.DEFENDER)
+
+        return players
+            .filter { defaultFilter.matches(it) }
             .maxByOrNull { it.goals }
             ?.let { it.name to it.goals }
             ?: error("В списке не осталось ни одного защитника")
@@ -70,6 +84,8 @@ class Resolver(private val players: List<Player>) : IResolver {
     }
 
     override fun getGoalsShareByMedianCost(): Pair<Double, Double> {
+
+        // Вручную находим медиану
         val sortedCosts = players.map { it.transferCost }.sorted()
         val size = sortedCosts.size
         val medianValue = if (size % 2 == 0) {
@@ -80,8 +96,24 @@ class Resolver(private val players: List<Player>) : IResolver {
 
         val sumOfGoals = players.sumOf { it.goals }.toDouble()
         val sumOfGoalsLess = players.filter { it.transferCost <= medianValue }.sumOf { it.goals }
-        val sumOfGoalsMore = players.filter { it.transferCost > medianValue }.sumOf { it.goals }
+        val sumOfGoalsMore = sumOfGoals - sumOfGoalsLess
 
         return (sumOfGoalsLess / sumOfGoals to sumOfGoalsMore / sumOfGoals)
+    }
+
+    override fun getGoalsShareByMedianCostWithFilter(): Pair<Double, Double> {
+
+        // находим медиану с помощью библиотеки jetbrains.kotlinx:dataframe-core
+        val costs = players.map { it.transferCost }
+        val medianValue = costs.toColumn().median()
+
+        val sumOfGoals = players.sumOf { it.goals }.toDouble()
+        val cheaperFilter = PlayerFilter.CheaperThan(medianValue)
+//        val expensiveFilter = PlayerFilter.Not(cheaperFilter)
+
+        val sumLess = players.filter { cheaperFilter.matches(it) }.sumOf { it.goals }
+        val sumMore = sumOfGoals - sumLess
+
+        return (sumLess / sumOfGoals to sumMore / sumOfGoals)
     }
 }

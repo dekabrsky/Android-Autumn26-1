@@ -13,6 +13,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jetbrains.kotlinx:dataframe-core:0.13.1")
 }
 
 tasks.test {

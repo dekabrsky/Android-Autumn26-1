@@ -12,6 +12,9 @@ interface IResolver {
     // 2. Выведите автора наибольшего числа голов из числа защитников и их количество.
     fun getBestScorerDefender(): Pair<String, Int>
 
+    // 2.5 Тот же результат, но через фильтры
+    fun getBestScorerDefenderWithFilter(): Pair<String, Int>
+
     // 3. Выведите русское название позиции самого дорогого немецкого игрока.
     fun getTheExpensiveGermanPlayerPosition(): String
 
@@ -34,4 +37,6 @@ interface IResolver {
     // 8. Разделите игроков медианой трансферной стоимости и верните пару долей:
     //    доля голов, забитых игроками не дороже медианы, и доля голов остальных.
     fun getGoalsShareByMedianCost(): Pair<Double, Double>
+
+    fun getGoalsShareByMedianCostWithFilter(): Pair<Double, Double>
 }

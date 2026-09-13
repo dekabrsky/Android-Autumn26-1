@@ -29,6 +29,20 @@ object CsvParser {
             ParseResult(players, skippedCount)
         }
 
+    fun findFirstMatchingPlayer(inputStream: InputStream): Player? {
+        return inputStream.bufferedReader().useLines { lines ->
+
+            val teamCache = mutableMapOf<Pair<String, String>, Team>()
+
+            lines.drop(1)
+                .mapNotNull { line -> parseLineOrNull(line, teamCache) }.firstOrNull { player ->
+                    player.participations >= 25 &&
+                    player.redCards + player.yellowCards == 0 &&
+                    player.transferCost > 50_000_000
+                }
+        }
+    }
+
     private fun parseLineOrNull(line: String, teamCache: MutableMap<Pair<String, String>, Team>): Player? {
 
         val parts = line
