@@ -13,6 +13,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jfree:jfreechart:1.5.4")
 }
 
 tasks.test {
@@ -20,7 +21,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 application {
