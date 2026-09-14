@@ -78,8 +78,9 @@ class Resolver(private val players: List<Player>) : IResolver {
                         compareByDescending<Map.Entry<String, Int>> { it.value }
                             .thenBy { it.key }
                     )
-                    .first()
-                    .key
+                    .firstOrNull()
+                    ?.key
+                    ?: "Агентств нет"
             }
     }
 

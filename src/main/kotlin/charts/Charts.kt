@@ -10,6 +10,7 @@ import java.awt.Desktop
 import java.io.File
 import org.jetbrains.kotlinx.kandy.letsplot.style.Style
 import org.jetbrains.kotlinx.kandy.letsplot.tooltips.tooltips
+import java.util.Locale
 
 
 fun buildPositionChart(players: List<Player>) {
@@ -59,15 +60,16 @@ fun buildPositionChart(players: List<Player>) {
 fun buildTop5TeamsChart(players: List<Player>) {
 
     // Получаем список названий 5 самых дорогих команд
-    val top5TeamNames = players
+    val top5Teams = players
         .groupBy { it.team.name }
-        .toList()
-        .sortedByDescending { (_, squad) -> squad.sumOf { it.transferCost } }
+        .map { (teamName, squad) ->
+            teamName to squad.sumOf { it.transferCost }
+        }
+        .sortedByDescending { it.second }
         .take(5)
-        .map { it.first } // Оставляем только название
 
     // Отбираем игроков этих команд
-    for (teamName in top5TeamNames) {
+    for ((teamName, totalCost) in top5Teams) {
         val teamPlayers = players.filter { it.team.name == teamName }
         val counts = teamPlayers.groupingBy { it.position.russianName }.eachCount()
 
@@ -79,11 +81,13 @@ fun buildTop5TeamsChart(players: List<Player>) {
         // Заменяем пробелы в имени команды на "_", чтобы файлы сохранялись корректно
         val fileName = teamName.replace(" ", "_") + "_structure.html"
 
+        val formattedCost = String.format(Locale("ru"), "%,d", totalCost)
+
         plot(chartData) {
             bars {
                 x("Позиция")
                 y("Количество")
-                fillColor("Позиция") // Автоматическая раскраска каждого столбца
+                fillColor("Позиция")
 
                 tooltips {
                     line("Позиция: @{Позиция}")
@@ -92,14 +96,9 @@ fun buildTop5TeamsChart(players: List<Player>) {
             }
 
             layout {
-                title = "Структура состава команды: $teamName"
+                title = "Структура состава команды: $teamName (Стоимость: $formattedCost $)"
                 size = 700 to 450
             }
         }.save(fileName)
-    }
-
-    val file = File("lets-plot-images/top5_teams.html")
-    if (file.exists() && Desktop.isDesktopSupported()) {
-        Desktop.getDesktop().browse(file.toURI())
     }
 }

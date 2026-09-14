@@ -38,5 +38,6 @@ interface IResolver {
     //    доля голов, забитых игроками не дороже медианы, и доля голов остальных.
     fun getGoalsShareByMedianCost(): Pair<Double, Double>
 
+    // // 8.5 Тот же результат, но через фильтры
     fun getGoalsShareByMedianCostWithFilter(): Pair<Double, Double>
 }

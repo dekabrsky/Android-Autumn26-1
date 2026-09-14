@@ -128,7 +128,8 @@ fun main() {
     }
 
     println("\n========================= 4 ЗАДАНИЕ =========================")
-    println("График первого задания открылся сам, второго - создались в папке lets-plot-images")
+    println("График первого задания должен открыться сам в браузере и сохранен в папке lets-plot-images | в .png и .html\n" +
+            "Графики второго задания - сохранены в папке lets-plot-images | в .png и .html")
     buildPositionChart(result.players)
     buildTop5TeamsChart(result.players)
 }
