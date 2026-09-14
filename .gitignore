@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+# Сгенерированные графики
+charts/
+
 # Kotlin
 .kotlin/
 
