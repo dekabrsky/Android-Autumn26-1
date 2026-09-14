@@ -1,6 +1,8 @@
 # Gradle
 .gradle/
 build/
+SOLUTION.md
+
 
 # Kotlin
 .kotlin/
