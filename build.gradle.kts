@@ -13,6 +13,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jfree:jfreechart:1.5.5")
 }
 
 tasks.test {
@@ -25,4 +26,8 @@ kotlin {
 
 application {
     mainClass.set("MainKt")
+}
+
+tasks.named<JavaExec>("run") {
+    jvmArgs("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8")
 }
