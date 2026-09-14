@@ -1,6 +1,5 @@
 package model
 
-// Состав агрегата содержит игроков с обычной ссылкой на команду, без циклических списков.
 data class Team(val name: String, val city: String) {
     var players: List<Player> = emptyList()
         private set

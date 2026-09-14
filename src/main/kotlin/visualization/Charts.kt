@@ -13,7 +13,6 @@ import java.io.File
 import javax.imageio.ImageIO
 import kotlin.math.max
 
-// Статические графики средствами Java2D, без окон и дополнительных зависимостей.
 object Charts {
     data class Point(val costMillions: Double, val goals: Double)
 

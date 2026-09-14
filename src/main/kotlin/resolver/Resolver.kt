@@ -40,7 +40,6 @@ class Resolver(players: List<Player>) : IResolver {
         .sortedWith(compareByDescending<Player> { it.goals.toLong() + 2L * it.assists }.thenBy { it.name })
         .take(3)
 
-    // Страны без представленных агентствами игроков отсутствуют в результате.
     override fun getMostPopularAgencyByCountry(): Map<String, String> = players
         .filter { it.agency != null }.groupBy { it.country }.toSortedMap()
         .mapValues { (_, members) ->
@@ -57,7 +56,6 @@ class Resolver(players: List<Player>) : IResolver {
         else costs[middle - 1] / 2.0 + costs[middle] / 2.0
     }
 
-    // При отсутствии голов обе доли равны нулю.
     override fun getGoalsShareByMedianCost(): Pair<Double, Double> {
         val totalGoals = players.sumOf { it.goals.toLong() }
         if (totalGoals == 0L) return 0.0 to 0.0

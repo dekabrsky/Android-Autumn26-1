@@ -8,7 +8,6 @@ import java.io.Reader
 data class ParseResult(val players: List<Player>, val skippedCount: Int)
 
 object CsvParser {
-    // Reader закрывает вызывающая сторона. Первая строка файлов задания — заголовок.
     fun parse(reader: Reader, hasHeader: Boolean = true): ParseResult {
         val lines = reader.buffered().lineSequence()
         val dataLines = if (hasHeader) lines.drop(1) else lines
@@ -21,7 +20,6 @@ object CsvParser {
         return ParseResult(players, skippedCount)
     }
 
-    // В файлах задания разделитель — точка с запятой; команда и город — отдельные поля.
     fun parseLineOrNull(line: String): Player? {
         val cells = line.split(';').map { it.trim() }
         if (cells.size != 12) return null
