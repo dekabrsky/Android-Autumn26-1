@@ -1,5 +1,6 @@
 package resolver
-
+import filter.ByPosition
+import filter.filterBy
 import model.Player
 import model.Position
 import model.Team
@@ -7,17 +8,22 @@ import model.Team
 class Resolver(
     private val players: List<Player>
 ) : IResolver {
-
+    private val teams: List<Team> by lazy {
+        Team.aggregate(players)
+    }
     override fun getCountWithoutAgency(): Int =
         players.count { it.agency == null }
 
     override fun getBestScorerDefender(): Pair<String, Int> {
+        val defenderFilter = ByPosition(Position.DEFENDER)
+
         val player = players
-            .filter { it.position == Position.DEFENDER }
-            .maxWithOrNull(
-                compareBy<Player> { it.goals }
-                    .thenByDescending { it.name }
+            .filterBy(defenderFilter)
+            .sortedWith(
+                compareByDescending<Player> { it.goals }
+                    .thenBy { it.name }
             )
+            .firstOrNull()
             ?: return "" to 0
 
         return player.name to player.goals
@@ -33,15 +39,11 @@ class Resolver(
             ?: ""
     }
 
-    override fun getTheRudestTeam(): Team {
-        return players
-            .groupBy { it.team }
-            .maxByOrNull { (_, teamPlayers) ->
-                teamPlayers.map { it.redCards }.average()
-            }
-            ?.key
-            ?: throw NoSuchElementException("Список игроков пуст")
-    }
+    override fun getTheRudestTeam(): Team =
+        teams.maxWithOrNull(
+            compareBy<Team> { it.averageRedCards }
+                .thenByDescending { it.name }
+        ) ?: throw NoSuchElementException("Список команд пуст")
 
     override fun getAverageTransferCostByPosition(): Map<Position, Double> {
         return players
@@ -121,4 +123,5 @@ class Resolver(
 
         return cheapShare to expensiveShare
     }
+
 }

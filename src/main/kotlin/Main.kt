@@ -1,6 +1,9 @@
 import parser.CsvParser
 import resolver.Resolver
-
+import parser.StreamingPlayerSearch
+import report.report
+import java.io.File
+import visualization.CountryCharts
 fun main() {
     val inputStream = object {}.javaClass.classLoader
         .getResourceAsStream("fakePlayersDirty.csv")
@@ -70,5 +73,83 @@ fun main() {
     println(
         "   Доля голов игроков дороже медианы: " +
                 "%.2f%%".format(goalsShares.second * 100)
+    )
+    println()
+    println("Дополнительные задания")
+
+    val streamingPlayer =
+        StreamingPlayerSearch.findFirstEligibleInResource()
+
+    if (streamingPlayer == null) {
+        println(
+            "Игрок, удовлетворяющий условиям потокового поиска, не найден"
+        )
+    } else {
+        println(
+            "Первый игрок потокового поиска: " +
+                    "${streamingPlayer.name}, " +
+                    "стоимость ${streamingPlayer.transferCost}, " +
+                    "матчей ${streamingPlayer.matches}"
+        )
+    }
+
+    println()
+    println("DSL-отчёт:")
+
+    val players = parseResult.players
+
+    report {
+        metric("Всего игроков") {
+            players.size
+        }
+
+        metric("Без агентства") {
+            players.count { it.agency == null }
+        }
+
+        section("Атаки") {
+            metric("Всего голов") {
+                players.sumOf { it.goals }
+            }
+
+            metric("Всего голевых передач") {
+                players.sumOf { it.assists }
+            }
+        }
+
+        section("Дисциплина") {
+            metric("Жёлтых карточек") {
+                players.sumOf { it.yellowCards }
+            }
+
+            metric("Красных карточек") {
+                players.sumOf { it.redCards }
+            }
+        }
+    }
+
+    println()
+    println("Построение графиков варианта 4...")
+
+    val countryChartFile =
+        CountryCharts.createCountryShareChart(
+            players = players,
+            outputFile = File("build/charts/country-share.png")
+        )
+
+    val teamCostChartFile =
+        CountryCharts.createTeamCostParetoChart(
+            players = players,
+            outputFile = File("build/charts/team-cost-pareto.png")
+        )
+
+    println(
+        "Диаграмма стран: " +
+                countryChartFile.absolutePath
+    )
+
+    println(
+        "Диаграмма команд: " +
+                teamCostChartFile.absolutePath
     )
 }
