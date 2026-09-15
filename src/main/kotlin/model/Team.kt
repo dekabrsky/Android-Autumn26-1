@@ -1,3 +1,8 @@
 package model
 
-class Team
+import com.github.javafaker.Country
+
+class Team(
+    val name: String,
+    val country: String
+)
