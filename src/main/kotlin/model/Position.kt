@@ -1,6 +1,19 @@
 package model
 
-// Задание: добавьте константы позиций из CSV (FORWARD, MIDFIELD, DEFENDER, GOALKEEPER)
-// с русским названием у каждой, а также companion-функцию
-// fromCsvTokenOrNull(token: String): Position?, не зависящую от регистра и лишних пробелов.
-enum class Position
+enum class Position(val ruName: String) {
+    GOALKEEPER("вратарь"),
+    DEFENDER("защитник"),
+    MIDFIELDER("полузащитник"),
+    FORWARD("нападающий");
+
+    companion object {
+        fun fromCsvTokenOrNull(token: String): Position? =
+            when (token.trim().lowercase()) {
+                "goalkeeper", "gk", "keeper", "вратарь" -> GOALKEEPER
+                "defender", "def", "defence", "defense", "защитник" -> DEFENDER
+                "midfielder", "midfield", "mid", "полузащитник" -> MIDFIELDER
+                "forward", "striker", "attack", "attacker", "fw", "нападающий" -> FORWARD
+                else -> null
+            }
+    }
+}
