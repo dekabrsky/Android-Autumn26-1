@@ -17,31 +17,31 @@ fun main() {
 
     System.setOut(PrintStream(System.out, true, StandardCharsets.UTF_8))
     val parser = CsvParser()
-    val result = parser.parse("src/main/resources/fakePlayersDirty.csv")
+    val result = parser.parse("src/main/resources/fakePlayers.csv")
+    val dirtyResult = parser.parse("src/main/resources/fakePlayersDirty.csv")
+    println("Всего игроков из файла fakePlayersDirty.csv: ${dirtyResult.players.size}")
+    println("Пропущено строк из файла fakePlayersDirty.csv: ${dirtyResult.skippedCount}")
+    println("Всего игроков из файла fakePlayers.csv: ${result.players.size}")
+    println("Пропущено строк из файла fakePlayers.csv: ${result.skippedCount}")
 
-    println("Всего игроков: ${result.players.size}")
-    println("Пропущено строк: ${result.skippedCount}")
-
-    if (result.players.isEmpty()) {
+    if (dirtyResult.players.isEmpty()) {
         println("Нет данных для анализа")
         return
     }
 
-    val resolver = Resolver(result.players)
+    val resolver = Resolver(dirtyResult.players)
 
-    println("\n")
-
-    println("\n1. Игроков без агентства: ${resolver.getCountWithoutAgency()}")
+    println("1. Игроков без агентства: ${resolver.getCountWithoutAgency()}")
 
     val bestScorer = resolver.getBestScorerDefender()
-    println("\n2. Лучший защитник-бомбардир: ${bestScorer.first} (${bestScorer.second} голов)")
+    println("2. Лучший защитник: ${bestScorer.first} (${bestScorer.second} голов)")
 
-    println("\n3. Позиция самого дорогого немца: ${resolver.getTheExpensiveGermanPlayerPosition()}")
+    println("3. Позиция самого дорогого немца: ${resolver.getTheExpensiveGermanPlayerPosition()}")
 
     val rudestTeam = resolver.getTheRudestTeam()
-    println("\n4. Команда с наибольшим средним красных: ${rudestTeam.name} (${rudestTeam.city})")
+    println("4. Команда с наибольшим средним красных карточек: ${rudestTeam.name} (${rudestTeam.city})")
 
-    println("\n5. Средняя стоимость по позициям (по убыванию):")
+    println("5. Средняя стоимость по позициям по убыванию:")
     resolver.getAverageTransferCostByPosition()
         .toList()
         .sortedByDescending { it.second }
@@ -49,22 +49,21 @@ fun main() {
             println("   ${position.russianName.padEnd(15)} ${"%.2f".format(avg)}")
         }
 
-    println("\n6. Топ-3 самых полезных игроков:")
+    println("6. Топ-3 самых полезных игроков:")
     resolver.getMostValuablePlayers().forEachIndexed { index, player ->
         val utility = player.goals + 2 * player.assists
         println("   ${index + 1}. ${player.name} (полезность: $utility)")
     }
 
-    println("\n7. Самое популярное агентство по странам:")
+    println("7. Самое популярное агентство по странам:")
     resolver.getMostPopularAgencyByCountry().forEach { (country, agency) ->
         println("   $country - $agency")
     }
 
     val (below, above) = resolver.getGoalsShareByMedianCost()
-    println("\n8. Распределение голов относительно медианной стоимости:")
+    println("8. Распределение голов относительно медианной стоимости:")
     println("   Игроки не дороже медианы: ${"%.1f".format(below * 100)}% голов")
     println("   Игроки дороже медианы: ${"%.1f".format(above * 100)}% голов")
-    println("\n")
 
     println("Задание 4. Вариант 3. Визуализация")
     plotTransferCostDistribution(result.players)

@@ -5,17 +5,31 @@ package model
 // fromCsvTokenOrNull(token: String): Position?, не зависящую от регистра и лишних пробелов.
 enum class Position(val russianName: String) {
     FORWARD("нападающий"),
-    MIDFIELDER("полузащитник"),
+    MIDFIELD("полузащитник"),
     DEFENDER("защитник"),
     GOALKEEPER("вратарь");
 
     companion object {
+        private val aliases = mapOf(
+            "midfield" to MIDFIELD,
+            "mid" to MIDFIELD,
+            "striker" to FORWARD,
+            "attack" to FORWARD,
+            "attacker" to FORWARD,
+            "fw" to FORWARD,
+            "def" to DEFENDER,
+            "defence" to DEFENDER,
+            "defense" to DEFENDER,
+            "gk" to GOALKEEPER,
+            "keeper" to GOALKEEPER
+        )
+
         fun fromCsvTokenOrNull(token: String): Position? {
             val normalized = token.trim().lowercase()
-            return entries.find {
-                it.russianName == normalized ||
-                        it.name.lowercase() == normalized
-            }
+            entries.find {
+                it.russianName == normalized || it.name.lowercase() == normalized
+            }?.let { return it }
+            return aliases[normalized]
         }
     }
 }

@@ -30,7 +30,7 @@ class InfrastructureTest {
         assertEquals(Position.FORWARD, Position.fromCsvTokenOrNull("НАПАДАЮЩИЙ"))
         assertEquals(Position.FORWARD, Position.fromCsvTokenOrNull("  нападающий  "))
 
-        assertEquals(Position.MIDFIELDER, Position.fromCsvTokenOrNull("полузащитник"))
+        assertEquals(Position.MIDFIELD, Position.fromCsvTokenOrNull("полузащитник"))
         assertEquals(Position.DEFENDER, Position.fromCsvTokenOrNull("защитник"))
         assertEquals(Position.GOALKEEPER, Position.fromCsvTokenOrNull("вратарь"))
     }
@@ -41,7 +41,7 @@ class InfrastructureTest {
         assertEquals(Position.FORWARD, Position.fromCsvTokenOrNull("Forward"))
         assertEquals(Position.FORWARD, Position.fromCsvTokenOrNull("forward"))
 
-        assertEquals(Position.MIDFIELDER, Position.fromCsvTokenOrNull("MIDFIELDER"))
+        assertEquals(Position.MIDFIELD, Position.fromCsvTokenOrNull("MIDFIELD"))
         assertEquals(Position.DEFENDER, Position.fromCsvTokenOrNull("defender"))
         assertEquals(Position.GOALKEEPER, Position.fromCsvTokenOrNull("Goalkeeper"))
     }
@@ -326,7 +326,7 @@ class InfrastructureTest {
                 name = "Player5",
                 team = team3,
                 city = "Munich",
-                position = Position.MIDFIELDER,
+                position = Position.MIDFIELD,
                 nationality = "Germany",
                 agency = null,
                 transferCost = 4000000,
@@ -404,7 +404,7 @@ class InfrastructureTest {
 
         assertEquals(5500000.0, averages[Position.FORWARD])
         assertEquals(3000000.0, averages[Position.DEFENDER])
-        assertEquals(4000000.0, averages[Position.MIDFIELDER])
+        assertEquals(4000000.0, averages[Position.MIDFIELD])
         assertEquals(2000000.0, averages[Position.GOALKEEPER])
     }
 

@@ -35,14 +35,12 @@ class Resolver(private val players: List<Player>) : IResolver {
         return team ?: Team("не найдено", "")
     }
 
-    override fun getAverageTransferCostByPosition(): Map<Position, Double> {
-        return Position.entries.associateWith { position ->
-            val costs = players
-                .filter { it.position == position }
-                .map { it.transferCost.toDouble() }
-            if (costs.isNotEmpty()) costs.average() else 0.0
-        }
-    }
+    override fun getAverageTransferCostByPosition(): Map<Position, Double> =
+        players.groupBy { it.position }
+            .mapValues { (_, list) -> list.map { it.transferCost }.average() }
+            .entries
+            .sortedByDescending { it.value }
+            .associate { it.key to it.value }
 
     override fun getMostValuablePlayers(): List<Player> {
         return players
