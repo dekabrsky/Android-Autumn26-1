@@ -1,8 +1,8 @@
-package resolver
+package Denisova1dz.resolver
 
-import model.Player
-import model.Position
-import model.Team
+import Denisova1dz.model.Player
+import Denisova1dz.model.Position
+import Denisova1dz.model.Team
 
 interface IResolver {
 

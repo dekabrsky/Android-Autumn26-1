@@ -1,3 +1,0 @@
-package resolver
-
-class Resolver

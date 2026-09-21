@@ -13,6 +13,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    // Добавляем библиотеку для построения графиков JFreeChart:
+    implementation("org.jfree:jfreechart:1.5.4")
 }
 
 tasks.test {
