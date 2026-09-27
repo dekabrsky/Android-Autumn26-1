@@ -13,9 +13,8 @@ import model.Position
 import resolver.Resolver
 import java.awt.Color
 import java.io.File
-import kotlin.math.roundToInt
 
-fun main(args: Array<String>) {
+fun main() {
     val parseResult = runParser()
     runAllResolvers(parseResult)
     val allPlayers = parseResult.players
@@ -61,12 +60,15 @@ fun runAllResolvers(parseResult: ParseResult) {
 }
 
 fun runBaseTask(allPlayers: List<Player>) {
-    val teams = allPlayers.map { it.team }.distinct()
-    val top10Teams = teams.sortedByDescending { it.totalCost }.take(10)
+    val top10Teams = allPlayers.groupBy { it.team }
+        .entries
+        .sortedByDescending { (_, players) -> players.sumOf { it.transferCost } }
+        .take(10)
 
     val dataset = DefaultCategoryDataset()
-    for (team in top10Teams) {
-        val costInMillions = team.totalCost.toDouble() / 1_000_000.0
+    for ((team, players) in top10Teams) {
+        val totalCost = players.sumOf { it.transferCost }
+        val costInMillions = totalCost.toDouble() / 1_000_000.0
         dataset.addValue(costInMillions, "Стоимость состава в миллионах", team.name)
     }
 

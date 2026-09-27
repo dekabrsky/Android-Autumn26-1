@@ -64,8 +64,6 @@ class ResolverTest {
             createPlayer(team = t1, red = 0),
             createPlayer(team = t2, red = 3)
         )
-        t1.players.addAll(players.filter { it.team == t1 })
-        t2.players.addAll(players.filter { it.team == t2 })
 
         val resolver = Resolver(players)
         assertEquals(t2, resolver.getTheRudestTeam())

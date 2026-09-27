@@ -83,7 +83,6 @@ object CsvParser
             )
             
             players.add(player)
-            team.players.add(player)
         }
         return ParseResult(players, skippedCount)
     }
