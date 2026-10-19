@@ -18,6 +18,10 @@ interface IResolver {
     // 4. Выберите команду с наибольшим средним числом красных карточек на одного игрока.
     fun getTheRudestTeam(): Team
 
+    fun getAverageRedCards(team: Team): Double
+
+    fun getTotalTransferCost(team: Team): Long
+
     // 5. Верните среднюю трансферную стоимость по позициям,
     //    отсортировав позиции по убыванию средней стоимости.
     fun getAverageTransferCostByPosition(): Map<Position, Double>
