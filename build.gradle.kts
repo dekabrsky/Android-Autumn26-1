@@ -11,8 +11,9 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.5.0")
     testImplementation(kotlin("test"))
-    implementation("com.github.javafaker:javafaker:1.0.2")
 }
 
 tasks.test {
