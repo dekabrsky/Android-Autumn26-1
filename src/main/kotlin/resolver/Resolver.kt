@@ -4,23 +4,30 @@ import model.Player
 import model.Position
 import model.Team
 
-class Resolver(private val players: List<Player>) : IResolver {
+class Resolver(players: List<Player>) : IResolver {
 
-    private val teams: List<Team> by lazy {
+    // Player и Team неизменяемы; копируем только структуру входной коллекции.
+    private val players: List<Player> = players.toList()
+
+    private val teamAggregates: List<TeamAggregate> =
         players
             .groupBy { it.team.name to it.team.city }
             .map { (_, teamPlayers) ->
                 val firstPlayer = teamPlayers.first()
 
-                Team(
-                    name = firstPlayer.team.name,
-                    city = firstPlayer.team.city,
+                TeamAggregate(
+                    team = Team(
+                        name = firstPlayer.team.name,
+                        city = firstPlayer.team.city
+                    ),
                     players = teamPlayers
                 )
             }
-    }
 
-    fun allTeams(): List<Team> = teams
+    fun teamAggregates(): List<TeamAggregate> = teamAggregates.toList()
+
+    /** Все уникальные команды без состава и статистики. */
+    fun allTeams(): List<Team> = teamAggregates.map { it.team }
 
     override fun countPlayersWithoutAgency(): Int =
         players.count { it.agency == null }
@@ -39,7 +46,7 @@ class Resolver(private val players: List<Player>) : IResolver {
             ?.position?.russianName
 
     override fun teamWithHighestAverageRedCards(): Team? =
-        teams.maxByOrNull { it.averageRedCards }
+        teamAggregates.maxByOrNull { it.averageRedCards }?.team
 
     override fun averageValueByPosition(): List<Pair<Position, Double>> =
         players

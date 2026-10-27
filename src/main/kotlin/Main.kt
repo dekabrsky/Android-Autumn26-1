@@ -1,5 +1,4 @@
 import model.Player
-import model.Team
 import parser.CsvParser
 import parser.ParseResult
 import report.report
@@ -66,7 +65,7 @@ fun main() {
     println("ЗАДАНИЕ 4. ВИЗУАЛИЗАЦИЯ")
     println("=".repeat(60))
 
-    runVisualizations(players, resolver.allTeams())
+    runVisualizations(players)
 
     println()
     println("Готово. Проверьте png-файлы рядом с рабочей директорией проекта.")
@@ -115,13 +114,17 @@ private fun runRequiredQueries(resolver: Resolver) {
     val bestRedCardsTeam = resolver.teamWithHighestAverageRedCards()
 
     if (bestRedCardsTeam != null) {
+        val averageRedCards = resolver.teamAggregates()
+            .first { it.team == bestRedCardsTeam }
+            .averageRedCards
+
         println(
             "\n4. Команда с наибольшим средним числом красных карточек: " +
                     "${bestRedCardsTeam.displayName}, " +
                     "среднее: " +
                     "%.2f".format(
                         RU_LOCALE,
-                        bestRedCardsTeam.averageRedCards
+                        averageRedCards
                     )
         )
     } else {
@@ -187,12 +190,12 @@ private fun runTeamAggregateDemo(resolver: Resolver) {
                 "общая стоимость клуба и среднее количество карточек"
     )
 
-    val teams = resolver.allTeams()
+    val teams = resolver.teamAggregates()
 
     teams.forEachIndexed { index, team ->
         println()
         println(
-            "${index + 1}) Команда - ${team.displayName} | " +
+            "${index + 1}) Команда - ${team.team.displayName} | " +
                     "Количество игроков в команде - ${team.players.size}"
         )
 
@@ -329,8 +332,7 @@ private fun runReportDslDemo(players: List<Player>) {
 }
 
 private fun runVisualizations(
-    players: List<Player>,
-    teams: List<Team>
+    players: List<Player>
 ) {
     plotCountriesShare(
         players,

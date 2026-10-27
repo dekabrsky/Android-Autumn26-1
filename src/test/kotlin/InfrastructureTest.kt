@@ -3,8 +3,10 @@ import model.Position
 import model.Team
 import parser.CsvParser
 import resolver.Resolver
+import resolver.TeamAggregate
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -118,6 +120,15 @@ class ResolverTest {
     }
 
     @Test
+    fun `пустой resolver не возвращает команду и не создаёт агрегатов`() {
+        val emptyResolver = Resolver(emptyList())
+
+        assertNull(emptyResolver.teamWithHighestAverageRedCards())
+        assertTrue(emptyResolver.teamAggregates().isEmpty())
+        assertTrue(emptyResolver.allTeams().isEmpty())
+    }
+
+    @Test
     fun `средняя стоимость по позициям отсортирована по убыванию`() {
         val result = resolver.averageValueByPosition()
         assertEquals(Position.FORWARD, result.first().first)
@@ -140,5 +151,31 @@ class ResolverTest {
         val report = resolver.goalsShareAroundMedianValue()
         assertEquals(20_000_000.0, report.medianValue)
         assertTrue(report.goalsSharePercentBelowMedian >= 0.0)
+    }
+
+    @Test
+    fun `агрегат команды сохраняет снимок состава и вычисляет статистику без кэша`() {
+        val source = mutableListOf(player1, player2)
+        val aggregate = TeamAggregate(realMadrid, source)
+        source.clear()
+
+        assertEquals(2, aggregate.players.size)
+        assertFailsWith<UnsupportedOperationException> {
+            (aggregate.players as MutableList<Player>).clear()
+        }
+        assertEquals(35_000_000, aggregate.totalSquadValue)
+        assertEquals(10, aggregate.totalCards)
+        assertEquals(5.0, aggregate.averageCards)
+        assertEquals(1.5, aggregate.averageRedCards)
+    }
+
+    @Test
+    fun `пустой агрегат возвращает нулевую статистику`() {
+        val aggregate = TeamAggregate(realMadrid, emptyList())
+
+        assertEquals(0L, aggregate.totalSquadValue)
+        assertEquals(0, aggregate.totalCards)
+        assertEquals(0.0, aggregate.averageCards)
+        assertEquals(0.0, aggregate.averageRedCards)
     }
 }
