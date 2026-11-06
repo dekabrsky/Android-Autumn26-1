@@ -13,6 +13,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("org.jfree:jfreechart:1.5.5")
 }
 
 tasks.test {
@@ -26,3 +27,5 @@ kotlin {
 application {
     mainClass.set("MainKt")
 }
+// чтобы кириллица нормально печаталась в консоли при ./gradlew run
+tasks.withType<JavaExec> { systemProperty("file.encoding", "UTF-8"); systemProperty("stdout.encoding", "UTF-8") }
